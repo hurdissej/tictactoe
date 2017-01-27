@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <p> Overview for {{ user.username }}</p>
+    <div class = "well col-md-6">
+        {% include "game_list_snippet.html" with header="Games waiting for your move" games_list=waiting_games %}
+        {% include "game_list_snippet.html" with header="Other active games" games_list=other_games %}
+        {% include "game_list_snippet.html" with header="Finished Games" games_list=finished_games%}
+        {% include "game_list_snippet.html" with header="All Games" games_list=all_games%}
+    </div>
+{% endblock content %}

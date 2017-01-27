@@ -1,0 +1,36 @@
+{%  load staticfiles %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log in</title>
+    {%  block styling %}
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    {%  endblock styling %}
+</head>
+<body>
+<div class="container-fluid" style="height: 200px"></div>
+<div class="container-fluid">
+    <div class="col-md-5"></div>
+    <div class="col-md-3">
+    {%  if form.errors %}
+        <p class = "text-warning"> Your username and password didn't match. Please try again</p>
+    {% endif %}
+    <h1 style="text-align: center"> Log in </h1>
+    <form role="form" class="form-horizontal-sm" method="post" action="{% url 'boardgames_login' %}">
+        {% csrf_token %}
+        {{ form | crispy}}
+        <button class = "btn btn-primary" type="submit" value="login"> Login!</button>
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    </div>
+    <div class="col-md-5"></div>
+</div>
+{% block javascript %}
+    <script src="{% static 'jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% endblock javascript %}
+</body>
+</html>

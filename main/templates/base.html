@@ -1,0 +1,54 @@
+{%  load staticfiles %}
+{% load admin_urls %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    {%  block styling %}
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'bootstrap/css/stylesheet.css' %}">
+    {%  endblock styling %}
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"> TicTacToe </a>
+    </div>
+    <ul class="nav navbar-nav">
+        {% if 'home' in request.path %}
+      <li class="active"><a href="{% url 'user_home' %}">Home</a></li>
+        {% else %}
+      <li><a href="{% url 'user_home' %}">Home</a></li>
+        {% endif %}
+      <li><a href="#"></a></li>
+      <li><a href="#"></a></li>
+      <li><a href="#"></a></li>
+    </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'tictactoe_invite' %}"> Invite a Friend </a> </li>
+        {% if user.is_superuser %}
+            <li><a href="{% url 'admin:index' %}"> Admin</a></li>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'boardgames_logout' %}"> Logout</a> </li>
+        {% else %}
+            <li><a href="{% url 'boardgames_login' %}"> Login</a> </li>
+        {% endif %}
+        </ul>
+  </div>
+</nav>
+<nav class="navbar-default">
+
+</nav>
+{% block content %}
+{% endblock content %}
+{% block javascript %}
+    <script src="{% static 'jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+{% endblock javascript %}
+</body>
+</html>
