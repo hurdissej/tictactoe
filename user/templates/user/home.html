@@ -6,6 +6,26 @@
         {% include "game_list_snippet.html" with header="Games waiting for your move" games_list=waiting_games %}
         {% include "game_list_snippet.html" with header="Other active games" games_list=other_games %}
         {% include "game_list_snippet.html" with header="Finished Games" games_list=finished_games%}
-        {% include "game_list_snippet.html" with header="All Games" games_list=all_games%}
+    </div>
+    <div class="well col-md-4 col-md-push-1">
+    {% if invitations_received %}
+        <h3 class="panel-heading"> Invitations received </h3>
+        <div class="list-group">
+            {% for inv in invitations_received %}
+                <a class="list-group-item" href={% url 'tictactoe_accept_invitation' pk=inv.id %}>
+                    {{ inv.from_user.username }} has invited you to play! Click here to reply!
+                </a>
+            {% empty %}
+                <a class="list-group-item" style="font-weight: bold" href={% url 'tictactoe_invite' %}>
+                Click here to invite another user to play!
+            </a>
+            {% endfor %}
+            <a class="list-group-item" style="font-weight: bold" href={% url 'tictactoe_invite' %}>
+                Click here to invite another user to play!
+            </a>
+        </div>
+
+    {% endif %}
+
     </div>
 {% endblock content %}

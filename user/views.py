@@ -11,11 +11,12 @@ def home(request):
     active_games = my_games.filter(status="A")
     finished_games = my_games.exclude(status="A")
     waiting_games = my_games.filter(next_to_move = request.user)
+    waiting_invites = request.user.invitations_received.all()
     other_games = my_games.exclude(next_to_move = request.user)
     context = {
         "other_games": other_games,
         "waiting_games": waiting_games,
         "finished_games": finished_games,
-
+        "invitations_received": waiting_invites
     }
     return render(request, "user/home.html", context)
