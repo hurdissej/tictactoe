@@ -2,7 +2,7 @@
 
 <div class="list-group">
     {% for game in games_list %}
-        <a class="list-group-item" href="#">
+        <a class="list-group-item" href={% url 'tictactoe_game_detail' pk=game.id %}>
             {{ game }}:
             {% if game.status == "A" %}
                 {% if game.next_to_move == user %} Your turn {% else %} Waiting for opponents move {% endif %}

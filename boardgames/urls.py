@@ -18,13 +18,11 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 admin.autodiscover()
 
-#home and admin
 urlpatterns = [
     url(r'^$', include('main.urls'), name='boardgames_home'),
     url(r'^admin/', admin.site.urls),
-    url(r'^tictactoe/invite', include('tictactoe.urls')),
+    url(r'^tictactoe/', include('tictactoe.urls')),
     url(r'^login',auth_views.login,{'template_name': 'registration/login.html'}, name='boardgames_login'),
     url(r'^logout/',auth_views.logout,{'next_page': 'index'}, name='boardgames_logout'),
     url(r'^user/', include('user.urls')),
     ]
-# log in and out
